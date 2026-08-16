@@ -1,0 +1,28 @@
+name: astrbot_plugin_wuwa_energy
+display_name: 鸣潮体力助手
+short_desc: 通过库街区 Token 查询鸣潮体力，体力不足时 @ 提醒
+desc: |-
+  基于库街区 (api.kurobbs.com) 的鸣潮 (Wuthering Waves) 体力查询与提醒插件，
+  使用网页版库街区的 Token 认证（登录 https://www.kurobbs.com 后从开发者工具获取）。
+
+  功能：
+  - `/体力 绑定 <用户ID> <Token>` 绑定库街区账号（Token 获取方法见 README）
+  - `/体力 查询` 查询自己的体力（当前值/上限/回满所需时间），每次查询自动刷新实时数据
+  - `/体力 查询 @用户` AstrBot 管理员可查询他人体力
+  - `/体力 提醒 <阈值>` 设置体力提醒阈值，低于阈值时在群内 @ 提醒
+  - `/体力 列表` 查看本群绑定情况
+
+  体力数据使用 refresh 端点获取实时值（非缓存）。
+  内置整点自动刷新任务 + 定时提醒检查任务。
+  同一用户短时间内只提醒一次，避免刷屏。
+version: 1.2.0
+author: DeepSeek Harness
+repo: https://github.com/TomyJan/Kuro-API-Collection
+astrbot_version: ">=3.4.36"
+support_platforms:
+  - aiocqhttp
+tags:
+  - 鸣潮
+  - 库街区
+  - 体力
+  - 提醒
