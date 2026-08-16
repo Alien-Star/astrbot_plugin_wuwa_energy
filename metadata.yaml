@@ -16,13 +16,14 @@ desc: |-
   内置整点自动刷新任务 + 定时提醒检查任务。
   同一用户短时间内只提醒一次，避免刷屏。
 version: 1.2.0
-author: DeepSeek Harness
-repo: https://github.com/TomyJan/Kuro-API-Collection
-astrbot_version: ">=3.4.36"
+author: AlienStar
+repo: https://github.com/Alien-Star/astrbot_plugin_wuwa_energy
 support_platforms:
   - aiocqhttp
+social_link: http://www.alienstar.icu/
 tags:
   - 鸣潮
+  - 库洛
   - 库街区
   - 体力
   - 提醒
