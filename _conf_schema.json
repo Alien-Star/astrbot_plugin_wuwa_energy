@@ -9,18 +9,18 @@
     "description": "同一用户两次提醒最小间隔（分钟）",
     "type": "int",
     "default": 120,
-    "hint": "防止体力长期低于阈值时反复刷屏提醒"
+    "hint": "防止体力达到阈值时反复刷屏提醒"
   },
   "default_threshold": {
     "description": "默认提醒阈值",
     "type": "int",
-    "default": 60,
-    "hint": "用户未单独设置阈值时使用；用户可用 /体力 提醒 <数值> 单独设置"
+    "default": 230,
+    "hint": "体力达到或超过此值时提醒（快去清体力）；用户可用 /体力提醒 <数值> 单独设置"
   },
   "remind_message_template": {
     "description": "提醒文案模板",
     "type": "text",
-    "default": "【鸣潮体力提醒】当前体力 {remain}/{max}，恢复满还需约 {minutes} 分钟，记得清体力哦~",
+    "default": "【鸣潮体力提醒】当前体力 {remain}/{max}，体力快满了，记得去清体力哦~",
     "hint": "可用变量：{remain} 当前体力 {max} 体力上限 {minutes} 回满所需分钟 {playerId} 玩家ID"
   }
 }

@@ -98,7 +98,7 @@ class WuwaEnergyPlugin(Star):
     def _get_threshold(self, rec: dict) -> int:
         t = rec.get("threshold")
         if t is None:
-            t = int(self.config.get("default_threshold", 60))
+            t = int(self.config.get("default_threshold", 230))
         return max(0, int(t))
 
     @staticmethod
@@ -242,10 +242,10 @@ class WuwaEnergyPlugin(Star):
         rec["last_remind_ts"] = 0
         await self._save_data()
         if threshold <= 0:
-            yield event.plain_result("已关闭体力不足提醒。")
+            yield event.plain_result("已关闭体力提醒。")
         else:
             yield event.plain_result(
-                f"已设置：当体力低于 {threshold} 时会在本群 @ 提醒你。"
+            f"已设置：当体力达到或超过 {threshold} 时会在本群 @ 提醒你（快去清体力）。"
             )
 
     @filter.command("体力解绑")
@@ -339,7 +339,7 @@ class WuwaEnergyPlugin(Star):
                     continue
 
                 energy = await self.client.query_energy(rec)
-                if energy.remain >= threshold:
+                if energy.remain < threshold:
                     continue
 
                 remain, max_ = energy.remain, energy.max
@@ -350,7 +350,7 @@ class WuwaEnergyPlugin(Star):
                 template = str(
                     self.config.get(
                         "remind_message_template",
-                        "【鸣潮体力提醒】当前体力 {remain}/{max}，恢复满还需约 {minutes} 分钟，记得清体力哦~",
+                        "【鸣潮体力提醒】当前体力 {remain}/{max}，体力快满了，记得去清体力哦~",
                     )
                 )
                 text = (
@@ -368,7 +368,7 @@ class WuwaEnergyPlugin(Star):
                 if ok:
                     rec["last_remind_ts"] = now
                     await self._save_data()
-                    logger.info(f"已提醒用户 {qq}：体力 {remain}/{max_} 低于阈值 {threshold}")
+                    logger.info(f"已提醒用户 {qq}：体力 {remain}/{max_} 已达到阈值 {threshold}")
             except KuroAuthError:
                 logger.warning(f"用户 {qq} 的 Token 已失效，跳过提醒；请其重新绑定")
             except asyncio.CancelledError:
